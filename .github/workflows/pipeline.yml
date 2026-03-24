@@ -1,0 +1,47 @@
+name: Pipeline HTML/CSS/JS Optimisé - Portfolio  # Nom affiché dans l'onglet Actions de GitHub
+on:
+  push:                # Déclenche le pipeline lors d'un push
+    branches: ["main"] # Uniquement sur la branche principale (main)
+
+jobs:
+  build-and-deploy:    # Nom de la tâche principale
+    runs-on: ubuntu-latest # Utilise une machine virtuelle Linux (Ubuntu)
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v5 # Récupère les fichiers de votre dépôt sur le runner
+
+      # --- ÉTAPE OPTIMISATION JS ---
+      - name: Minifier le JavaScript
+        run: |
+          npm install -g terser # Installe l'outil de minification JS
+          # Minifie script.js vers script.min.js (adaptez les noms de fichiers)
+          terser /src/script.js -o /src/script.min.js --compress --mangle 
+
+      # --- ÉTAPE OPTIMISATION CSS ---
+      - name: Minifier le CSS
+        run: |
+          npm install -g clean-css-cli # Installe l'outil de minification CSS
+          # Minifie style.css en écrasant le fichier original
+          cleancss -o /src/style.css /src/style.css 
+
+      # --- ÉTAPE OPTIMISATION HTML ---
+      - name: Minifier le HTML
+        uses: emepetres/html-minifier-action@v1 # Action tierce pour traiter le HTML
+        with:
+          rootDir: '.' # Répertoire où chercher les fichiers .html
+          flags: "collapseWhitespace, removeComments" # Options : supprime espaces et commentaires
+
+      # --- ÉTAPE DE VALIDATION ---
+      - name: Vérifier les liens
+        uses: modernweb-dev/check-html-links-action@v1 # Vérifie si des liens 404 existent
+        with:
+          doc-folder: '.' # Analyse tous les fichiers HTML à la racine
+
+      # --- ÉTAPE DE DÉPLOIEMENT ---
+      - name: Préparer l'artefact
+        uses: actions/upload-pages-artifact@v3 # Compresse les fichiers pour GitHub Pages
+        with:
+          path: '.' # Dossier à envoyer (tout le projet actuel)
+
+      - name: Déployer sur GitHub Pages
+        uses: actions/deploy-pages@v4 # Publie officiellement le site en ligne
