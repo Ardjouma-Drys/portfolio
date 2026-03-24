@@ -28,10 +28,16 @@ jobs:
 
       # --- ÉTAPE OPTIMISATION HTML ---
       - name: Minifier le HTML
-        uses: emepetres/html-minifier-action@v1 # Action tierce pour traiter le HTML
-        with:
-          rootDir: '.' # Répertoire où chercher les fichiers .html
-          flags: "collapseWhitespace, removeComments" # Options : supprime espaces et commentaires
+        run: |
+          npm install -g html-minifier-terser
+          # Installe l'outil de minification HTML
+          # Minifie index.html en écrasant le fichier original
+          html-minifier-terser \
+            --collapse-whitespace \
+            --remove-comments \
+            --minify-css true \
+            --minify-js true \
+            -o index.html index.html
 
       # --- ÉTAPE DE VALIDATION ---
       - name: Vérifier les liens
