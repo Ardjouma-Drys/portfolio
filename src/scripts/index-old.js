@@ -49,11 +49,98 @@ window.addEventListener("scroll", function () {
   if (window.scrollY > 50) {
     navbar.style.background = "rgba(10, 10, 10, 0.98)";
   } else {
-    navbar.style.background = "rgba(10, 10, 10, 0.95)";
+    navbar.style.background = "";
   }
 });
 
-// Hero profile image upload
+// Active nav link
+window.addEventListener("scroll", function () {
+  const sections = document.querySelectorAll("section");
+  const navLinks = document.querySelectorAll(".nav-link");
+
+  let current = "";
+  sections.forEach((section) => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.clientHeight;
+    if (window.scrollY >= sectionTop - 200) {
+      current = section.getAttribute("id");
+    }
+  });
+
+  navLinks.forEach((link) => {
+    link.classList.remove("active");
+    if (link.getAttribute("href").slice(1) === current) {
+      link.classList.add("active");
+    }
+  });
+});
+
+// Typewriter effect for name and title
+function typeWriter(element, text, speed = 100) {
+  let i = 0;
+  element.textContent = "";
+
+  function type() {
+    if (i < text.length) {
+      element.textContent += text.charAt(i);
+      i++;
+      setTimeout(type, speed);
+    }
+  }
+
+  type();
+}
+
+// Typewriter effect for rotating titles
+function typeWriterRotating(element, texts, speed = 100, pause = 2000) {
+  let textIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+
+  function type() {
+    const currentText = texts[textIndex];
+
+    if (isDeleting) {
+      element.textContent = currentText.substring(0, charIndex - 1);
+      charIndex--;
+
+      if (charIndex === 0) {
+        isDeleting = false;
+        textIndex = (textIndex + 1) % texts.length;
+        setTimeout(type, 500);
+        return;
+      }
+    } else {
+      element.textContent = currentText.substring(0, charIndex + 1);
+      charIndex++;
+
+      if (charIndex === currentText.length) {
+        isDeleting = true;
+        setTimeout(type, pause);
+        return;
+      }
+    }
+
+    setTimeout(type, isDeleting ? speed / 2 : speed);
+  }
+
+  type();
+}
+
+// Initialize typewriter effects
+setTimeout(() => {
+  const heroName = document.getElementById("heroName");
+  const heroTitle = document.getElementById("heroTitle");
+
+  //typeWriter(heroName, "Ardjouma Drissa OUEDRAOGO", 100);
+
+  setTimeout(() => {
+    const titles = ["Développeur Full Stack", "Pentesteur", "AI Enthusiast"];
+    typeWriterRotating(heroTitle, titles, 100, 2000);
+  }, 2500);
+}, 1500);
+
+// Profile image upload - Hero only
 document
   .getElementById("heroProfileUpload")
   .addEventListener("click", function () {
@@ -121,6 +208,7 @@ function goToSlide(slideIndex) {
   updateCarousel();
 }
 
+
 // Back to top button
 const backToTopBtn = document.getElementById("backToTop");
 
@@ -177,7 +265,7 @@ document.getElementById("contactForm").addEventListener("submit", function (e) {
     message: document.getElementById("message").value,
   };
 
-  // Here you would normally send data to a server
+  // Here you would normally send the data to a server
   console.log("Form submitted:", formData);
 
   // Show success message
@@ -265,19 +353,41 @@ function typeWriterRotating(element, texts, speed = 100, pause = 2000) {
   type();
 }
 
-// Initialize everything on DOM load
+// Initialize typewriter effects
+setTimeout(() => {
+  const heroName = document.getElementById("heroName");
+  const heroTitle = document.getElementById("heroTitle");
+  
+  typeWriter(heroName, "Ardjouma Drissa OUEDRAOGO", 100);
+  
+  setTimeout(() => {
+    const titles = ["Développeur Web et Mobile", "Pentesteur", "AI Enthusiast"];
+    typeWriterRotating(heroTitle, titles, 100, 2000);
+  }, 2500);
+}, 1500);
+
+// Parallax effect
+window.addEventListener("scroll", function () {
+  const scrolled = window.pageYOffset;
+  const parallax = document.querySelector(".hero-image i");
+  if (parallax) {
+    parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
+  }
+});
+
+// Add hover effect to project cards
+document.querySelectorAll(".project-card").forEach((card) => {
+  card.addEventListener("mouseenter", function () {
+    this.style.transform = "translateY(-15px) scale(1.02)";
+  });
+
+  card.addEventListener("mouseleave", function () {
+    this.style.transform = "translateY(0) scale(1)";
+  });
+});
+
+// Close mobile dropdown when clicking on nav links
 document.addEventListener('DOMContentLoaded', function() {
-  // Initialize carousel
-  updateCarousel();
-  
-  // Set up carousel event listeners
-  prevBtn.addEventListener("click", prevSlide);
-  nextBtn.addEventListener("click", nextSlide);
-  
-  // Auto-rotate carousel
-  setInterval(nextSlide, 5000);
-  
-  // Close mobile dropdown when clicking on nav links
   const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
   const navbarCollapse = document.querySelector('.navbar-collapse');
   const navbarToggler = document.querySelector('.navbar-toggler');
@@ -294,27 +404,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
-  // Initialize typewriter effects
-  setTimeout(() => {
-    const heroName = document.getElementById("heroName");
-    const heroTitle = document.getElementById("heroTitle");
-    
-    typeWriter(heroName, "Ardjouma Drissa OUEDRAOGO", 100);
-    
-    setTimeout(() => {
-      const titles = ["Développeur Web et Mobile", "Pentesteur", "AI Enthusiast"];
-      typeWriterRotating(heroTitle, titles, 100, 2000);
-    }, 2500);
-  }, 1500);
-});
-
-// Add hover effect to project cards
-document.querySelectorAll(".project-card").forEach((card) => {
-  card.addEventListener("mouseenter", function () {
-    this.style.transform = "translateY(-15px) scale(1.02)";
-  });
-
-  card.addEventListener("mouseleave", function () {
-    this.style.transform = "translateY(0) scale(1)";
-  });
+  // Initialize carousel
+  updateCarousel();
 });

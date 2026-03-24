@@ -256,8 +256,11 @@ body {
   backdrop-filter: blur(10px);
   border: 1px solid var(--border-color);
   border-radius: 20px;
-  padding: 40px;
+  padding: 20px;
   transition: all 0.3s ease;
+  height: auto;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .about-card:hover {
@@ -267,17 +270,18 @@ body {
 }
 
 .skill-bar {
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
 .skill-name {
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
   color: var(--text-primary);
+  font-size: 0.85rem;
 }
 
 .skill-progress {
-  height: 8px;
+  height: 6px;
   background: var(--border-color);
   border-radius: 10px;
   overflow: hidden;
@@ -302,7 +306,9 @@ body {
   border-radius: 20px;
   overflow: hidden;
   transition: all 0.3s ease;
-  height: 100%;
+  height: 320px;
+  display: flex;
+  flex-direction: column;
 }
 
 .project-card:hover {
@@ -312,13 +318,13 @@ body {
 }
 
 .project-image {
-  height: 200px;
+  height: 140px;
   background-size: cover;
   background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 3rem;
+  font-size: 2rem;
   color: white;
   position: relative;
   overflow: hidden;
@@ -345,34 +351,41 @@ body {
 }
 
 .project-content {
-  padding: 30px;
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .project-title {
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   color: var(--text-primary);
+  line-height: 1.3;
 }
 
 .project-description {
   color: var(--text-muted);
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  font-size: 0.85rem;
+  line-height: 1.4;
 }
 
 .project-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 8px;
+  margin-top: auto;
 }
 
 .tag {
   background: rgba(102, 126, 234, 0.2);
   color: #667eea;
-  padding: 5px 15px;
-  border-radius: 20px;
-  font-size: 0.9rem;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 0.75rem;
   border: 1px solid rgba(102, 126, 234, 0.3);
 }
 
@@ -390,14 +403,13 @@ body {
 }
 
 .carousel-track {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  display: flex;
   transition: transform 0.5s ease;
 }
 
 .carousel-slide {
-  min-width: 0;
+  min-width: calc(25% - 15px);
+  margin-right: 20px;
 }
 
 .carousel-controls {
@@ -455,20 +467,21 @@ body {
 }
 
 @media (max-width: 1200px) {
-  .carousel-track {
-    grid-template-columns: repeat(3, 1fr);
+  .carousel-slide {
+    min-width: calc(33.333% - 14px);
   }
 }
 
 @media (max-width: 992px) {
-  .carousel-track {
-    grid-template-columns: repeat(2, 1fr);
+  .carousel-slide {
+    min-width: calc(50% - 10px);
   }
 }
 
 @media (max-width: 576px) {
-  .carousel-track {
-    grid-template-columns: 1fr;
+  .carousel-slide {
+    min-width: 100%;
+    margin-right: 0;
   }
 }
 
@@ -486,10 +499,12 @@ body {
   backdrop-filter: blur(10px);
   border: 1px solid var(--border-color);
   border-radius: 20px;
-  padding: 40px;
+  padding: 20px;
   text-align: center;
   transition: all 0.3s ease;
-  height: 100%;
+  height: auto;
+  max-width: 350px;
+  margin: 0 auto;
 }
 
 .service-card:hover {
@@ -499,8 +514,8 @@ body {
 }
 
 .service-icon {
-  font-size: 3rem;
-  margin-bottom: 20px;
+  font-size: 2rem;
+  margin-bottom: 12px;
   background: var(--gradient);
   -webkit-background-clip: text;
   background-clip: text;
@@ -508,14 +523,16 @@ body {
 }
 
 .service-title {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   color: var(--text-primary);
 }
 
 .service-description {
   color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.4;
 }
 
 /* Contact Section */
@@ -528,7 +545,10 @@ body {
   backdrop-filter: blur(10px);
   border: 1px solid var(--border-color);
   border-radius: 20px;
-  padding: 40px;
+  padding: 20px;
+  height: auto;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .form-control,
@@ -537,7 +557,7 @@ body {
   border: 1px solid var(--border-color);
   color: var(--text-primary);
   border-radius: 10px;
-  padding: 15px;
+  padding: 10px;
 }
 
 .form-control:focus,
@@ -881,4 +901,212 @@ body {
 .stat-label {
   color: var(--text-muted);
   font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .hero-title {
+    font-size: 3rem;
+  }
+  
+  .hero-profile-image-container {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .hero-description {
+    font-size: 1rem;
+  }
+  
+  .hero-profile-image-container {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .section-title {
+    font-size: 2.2rem;
+  }
+  
+  .carousel-track {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 100px 0 50px;
+  }
+  
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .hero-description {
+    font-size: 0.95rem;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn-hero {
+    margin: 5px 0;
+    padding: 12px 30px;
+    font-size: 1rem;
+  }
+  
+  .hero-profile-image-container {
+    width: 180px;
+    height: 180px;
+    margin-top: 30px;
+  }
+  
+  .section {
+    padding: 60px 0;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .carousel-track {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .skill-name {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-title {
+    font-size: 1.8rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .hero-description {
+    font-size: 0.9rem;
+  }
+  
+  .btn-hero {
+    padding: 10px 25px;
+    font-size: 0.9rem;
+  }
+  
+  .hero-profile-image-container {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .hero-profile-upload {
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+  }
+  
+  .carousel-track {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .project-card {
+    margin-bottom: 20px;
+  }
+  
+  .project-content {
+    padding: 20px;
+  }
+  
+  .project-title {
+    font-size: 1.2rem;
+  }
+  
+  .service-card {
+    padding: 30px 20px;
+  }
+  
+  .contact-form {
+    padding: 30px 20px;
+  }
+  
+  .back-to-top {
+    width: 45px;
+    height: 45px;
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .about-card {
+    padding: 30px 20px;
+  }
+  
+  .skill-bar {
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .hero-description {
+    font-size: 0.85rem;
+  }
+  
+  .hero-profile-image-container {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+  
+  .btn-hero {
+    padding: 8px 20px;
+    font-size: 0.85rem;
+  }
+  
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+  
+  .footer {
+    padding: 30px 0 20px;
+  }
+  
+  .social-links {
+    gap: 15px;
+  }
 }
