@@ -21,8 +21,8 @@ jobs:
       - name: Minifier le CSS
         run: |
           npm install -g clean-css-cli # Installe l'outil de minification CSS
-          # Minifie style.css en écrasant le fichier original
-          cleancss -o /src/style.css /src/style.css 
+          # Minifie styles.css en écrasant le fichier original
+          cleancss -o /src/styles.css /src/styles.css 
 
       # --- ÉTAPE OPTIMISATION HTML ---
       - name: Minifier le HTML
