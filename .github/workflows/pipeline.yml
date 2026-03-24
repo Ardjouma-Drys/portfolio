@@ -13,16 +13,18 @@ jobs:
       # --- ÉTAPE OPTIMISATION JS ---
       - name: Minifier le JavaScript
         run: |
-          npm install -g terser # Installe l'outil de minification JS
+          npm install -g terser 
+          # Installe l'outil de minification JS
           # Minifie script.js vers script.min.js (adaptez les noms de fichiers)
-          terser /src/script.js -o /src/script.min.js --compress --mangle 
+          terser /src/scripts/index.js -o /src/scripts/index.min.js --compress --mangle 
 
       # --- ÉTAPE OPTIMISATION CSS ---
       - name: Minifier le CSS
         run: |
-          npm install -g clean-css-cli # Installe l'outil de minification CSS
+          npm install -g clean-css-cli *
+          # Installe l'outil de minification CSS
           # Minifie styles.css en écrasant le fichier original
-          cleancss -o /src/styles.css /src/styles.css 
+          cleancss -o /src/styles/styles.css /src/styles/styles.css 
 
       # --- ÉTAPE OPTIMISATION HTML ---
       - name: Minifier le HTML
