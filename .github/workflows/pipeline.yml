@@ -21,7 +21,7 @@ jobs:
       # --- ÉTAPE OPTIMISATION CSS ---
       - name: Minifier le CSS
         run: |
-          npm install -g clean-css-cli *
+          npm install -g clean-css-cli
           # Installe l'outil de minification CSS
           # Minifie styles.css en écrasant le fichier original
           cleancss -o src/styles/styles.css src/styles/styles.css 
