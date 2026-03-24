@@ -3,6 +3,11 @@ on:
   push:                # Déclenche le pipeline lors d'un push
     branches: ["main"] # Uniquement sur la branche principale (main)
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build-and-deploy:    # Nom de la tâche principale
     runs-on: ubuntu-latest # Utilise une machine virtuelle Linux (Ubuntu)
